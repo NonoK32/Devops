@@ -1,0 +1,2 @@
+En la reunion de equipo hablamos sobre plazos, prioridades y riesgos.
+El objetivo principal del sprint es mejorar el rendimiento de la API.
