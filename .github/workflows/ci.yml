@@ -33,16 +33,27 @@ jobs:
       - name: Run tests with coverage
         run: pytest --cov=main --cov-config=.coveragerc --cov-report=term-missing --cov-report=xml
 
+      - name: Check CODECOV_TOKEN exists
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: |
+          if [ -z "${CODECOV_TOKEN}" ]; then
+            echo "CODECOV_TOKEN vacio o no definido"
+            exit 1
+          fi
+          echo "CODECOV_TOKEN presente"
+
       - name: Upload coverage to Codecov
-        if: ${{ env.CODECOV_TOKEN != '' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && env.CODECOV_TOKEN != '' }}
         uses: codecov/codecov-action@v5
         with:
           files: ./coverage.xml
           token: ${{ env.CODECOV_TOKEN }}
+          slug: NonoK32/Devops
+          verbose: true
           fail_ci_if_error: true
 
       - name: Skip Codecov upload (missing token)
-        if: ${{ env.CODECOV_TOKEN == '' }}
+        if: ${{ github.event_name != 'push' || github.ref != 'refs/heads/main' || env.CODECOV_TOKEN == '' }}
         run: echo "CODECOV_TOKEN no configurado. Se omite la subida de cobertura."
 
   docker-build:
