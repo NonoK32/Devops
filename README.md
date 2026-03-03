@@ -1,7 +1,7 @@
 # TXT Search API
 
 [![CI](https://github.com/NonoK32/Devops/actions/workflows/ci.yml/badge.svg)](https://github.com/NonoK32/Devops/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/NonoK32/Devops/branch/main/graph/badge.svg)](https://codecov.io/gh/NonoK32/Devops)
+[![codecov](https://codecov.io/gh/NonoK32/Devops/graph/badge.svg?token=E9G47GBGTZ)](https://codecov.io/gh/NonoK32/Devops)
 
 ## Ejecutar
 
