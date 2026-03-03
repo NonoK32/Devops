@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+set -eu
+
+echo "Running tests before push..."
+
+if [ -x ".venv/bin/python" ]; then
+  PYTHON_CMD=".venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+  PYTHON_CMD="python3"
+else
+  echo "Python not found. Install Python 3 and retry."
+  exit 1
+fi
+
+"$PYTHON_CMD" -m pytest -q
+
+echo "Tests passed. Push allowed."
