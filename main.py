@@ -54,5 +54,5 @@ def search_word(params: SearchQueryParams = Depends(get_query_params)) -> Search
         if params.palabra.lower() in content.lower():
             matched_files.append(txt_file.name)
 
-    found_flag = matched_files.length > 0
+    found_flag = len(matched_files) > 0
     return SearchResponse(palabra=params.palabra, archivos=matched_files, found=found_flag)
