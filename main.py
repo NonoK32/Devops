@@ -28,6 +28,7 @@ class SearchQueryParams(BaseModel):
 class SearchResponse(BaseModel):
     palabra: str
     archivos: List[str]
+    found: bool
 
 
 def get_query_params(palabra: str) -> SearchQueryParams:
@@ -53,4 +54,5 @@ def search_word(params: SearchQueryParams = Depends(get_query_params)) -> Search
         if params.palabra.lower() in content.lower():
             matched_files.append(txt_file.name)
 
-    return SearchResponse(palabra=params.palabra, archivos=matched_files)
+    found_flag = matched_files.length > 0
+    return SearchResponse(palabra=params.palabra, archivos=matched_files, found=found_flag)
