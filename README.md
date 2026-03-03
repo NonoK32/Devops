@@ -38,6 +38,16 @@ docker build -t devopscap-api:local .
 docker run --rm -p 8000:8000 devopscap-api:local
 ```
 
+Publicacion automatica en GHCR desde CI:
+- En `push` a `main`: `ghcr.io/nonok32/devops:latest` y `ghcr.io/nonok32/devops:sha-<commit>`
+- En tags tipo `v1.0.0`: `ghcr.io/nonok32/devops:v1.0.0`
+
+Ejemplo de pull:
+
+```bash
+docker pull ghcr.io/nonok32/devops:latest
+```
+
 ## Endpoint principal
 
 `GET /?palabra=python`
