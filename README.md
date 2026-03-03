@@ -51,4 +51,4 @@ docker pull ghcr.io/nonok32/devops:latest
 
 `GET /?palabra=python`
 
-Busca la palabra en todos los `.txt` dentro de `txt_files/` y devuelve los nombres de archivos que la contienen.
+Busca la palabra en todos los `.txt` dentro de `txt_files/` y devuelve un booleano indicando si la encontró y en caso afirmativo, tambien devuelve los nombres de archivos que la contienen.
