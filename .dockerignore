@@ -1,0 +1,17 @@
+.git
+.github
+.githooks
+.venv
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.coverage
+.coveragerc
+coverage.xml
+htmlcov
+.vscode
+tests
+README.md
+scripts

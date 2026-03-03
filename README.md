@@ -30,6 +30,13 @@ sh scripts/setup-hooks.sh
 
 Esto activa el hook versionado en `.githooks/pre-push`.
 
+## Docker
+
+```bash
+docker build -t devopscap-api:local .
+docker run --rm -p 8000:8000 devopscap-api:local
+```
+
 ## Endpoint principal
 
 `GET /?palabra=python`
