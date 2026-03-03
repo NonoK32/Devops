@@ -2,7 +2,8 @@ from pathlib import Path
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
-from pydantic import BaseModel, Field, field_validator
+from fastapi.exceptions import RequestValidationError
+from pydantic import BaseModel, Field, ValidationError, field_validator
 
 
 TXT_DIRECTORY = Path("txt_files")
@@ -30,7 +31,11 @@ class SearchResponse(BaseModel):
 
 
 def get_query_params(palabra: str) -> SearchQueryParams:
-    return SearchQueryParams(palabra=palabra)
+    try:
+        return SearchQueryParams(palabra=palabra)
+    except ValidationError as exc:
+        # Convert pydantic model validation into FastAPI 422 response
+        raise RequestValidationError(exc.errors()) from exc
 
 
 @app.get("/", response_model=SearchResponse)
