@@ -20,7 +20,11 @@ def test_search_word_returns_matching_files(tmp_path: Path, monkeypatch) -> None
     response = client.get("/", params={"palabra": "python"})
 
     assert response.status_code == 200
-    assert response.json() == {"palabra": "python", "archivos": ["dos.txt", "tres.txt"]}
+    assert response.json() == {
+        "palabra": "python",
+        "archivos": ["dos.txt", "tres.txt"],
+        "found": True,
+    }
 
 
 def test_search_word_returns_empty_list_when_no_matches(tmp_path: Path, monkeypatch) -> None:
@@ -30,7 +34,7 @@ def test_search_word_returns_empty_list_when_no_matches(tmp_path: Path, monkeypa
     response = client.get("/", params={"palabra": "java"})
 
     assert response.status_code == 200
-    assert response.json() == {"palabra": "java", "archivos": []}
+    assert response.json() == {"palabra": "java", "archivos": [], "found": False}
 
 
 def test_search_word_returns_500_if_directory_does_not_exist(monkeypatch) -> None:
@@ -57,3 +61,4 @@ def test_query_validation_trims_whitespace(tmp_path: Path, monkeypatch) -> None:
 
     assert response.status_code == 200
     assert response.json()["palabra"] == "python"
+    assert response.json()["found"] is True
