@@ -1,7 +1,10 @@
 from pathlib import Path
+import sys
 
 from fastapi.testclient import TestClient
 
+# Ensure the project root is importable in CI environments.
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import main
 
 
