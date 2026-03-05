@@ -47,6 +47,19 @@ Ejemplo de pull:
 docker pull ghcr.io/nonok32/devops:latest
 ```
 
+## Terraform
+
+Bootstrap inicial en `infra/terraform` para crear red y servidor base en Hetzner Cloud.
+
+```bash
+cd infra/terraform
+cp terraform.tfvars.example terraform.tfvars
+export TF_VAR_hcloud_token="TU_TOKEN_HETZNER"
+terraform init
+terraform plan
+terraform apply
+```
+
 ## Endpoint principal
 
 `GET /?palabra=python`

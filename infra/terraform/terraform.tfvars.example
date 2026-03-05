@@ -1,0 +1,15 @@
+project_name       = "devops-api"
+environment        = "dev"
+location           = "nbg1"
+server_type        = "cx22"
+image              = "ubuntu-24.04"
+ssh_public_key_path = "~/.ssh/id_ed25519.pub"
+network_cidr       = "10.10.0.0/16"
+subnet_cidr        = "10.10.1.0/24"
+subnet_zone        = "eu-central"
+server_private_ip  = "10.10.1.10"
+
+# Do not commit real tokens to git.
+# Option A: export TF_VAR_hcloud_token in your shell.
+# Option B: set hcloud_token here only in local terraform.tfvars (ignored by git).
+# hcloud_token = "your-hetzner-token"
