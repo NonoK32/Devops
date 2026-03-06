@@ -22,3 +22,8 @@ output "server_private_ip" {
   description = "Private IP address inside Hetzner network"
   value       = hcloud_server_network.app_private_network.ip
 }
+
+output "app_url" {
+  description = "Public URL to reach the deployed app (HTTP)"
+  value       = "http://${hcloud_server.app.ipv4_address}:${var.host_port}/?palabra=python"
+}

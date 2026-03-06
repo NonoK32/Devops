@@ -63,3 +63,27 @@ variable "server_private_ip" {
   type        = string
   default     = "10.10.1.10"
 }
+
+variable "app_image" {
+  description = "Docker image to run on first boot"
+  type        = string
+  default     = "ghcr.io/nonok32/devops:latest"
+}
+
+variable "app_container_name" {
+  description = "Container name for the deployed app"
+  type        = string
+  default     = "devops-api"
+}
+
+variable "app_port" {
+  description = "Container port exposed by the app"
+  type        = number
+  default     = 8000
+}
+
+variable "host_port" {
+  description = "Host port to map for the app"
+  type        = number
+  default     = 8000
+}

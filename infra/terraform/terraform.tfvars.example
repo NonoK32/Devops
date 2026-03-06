@@ -8,6 +8,10 @@ network_cidr       = "10.10.0.0/16"
 subnet_cidr        = "10.10.1.0/24"
 subnet_zone        = "eu-central"
 server_private_ip  = "10.10.1.10"
+app_image          = "ghcr.io/nonok32/devops:latest"
+app_container_name = "devops-api"
+app_port           = 8000
+host_port          = 8000
 
 # Do not commit real tokens to git.
 # Option A: export TF_VAR_hcloud_token in your shell.

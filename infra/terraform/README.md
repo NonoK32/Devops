@@ -5,6 +5,10 @@ Este stack crea una base para desplegar la app en Hetzner Cloud:
 - 1 subnet privada (`hcloud_network_subnet`)
 - 1 firewall (SSH `22` + app `8000`)
 - 1 servidor (`hcloud_server`) con IP publica y privada
+- `user_data` para:
+  - instalar Docker
+  - descargar `app_image`
+  - ejecutar el contenedor con restart automático
 - 1 SSH key importada desde tu equipo
 
 ## Requisitos
@@ -24,7 +28,7 @@ terraform plan
 terraform apply
 ```
 
-Al finalizar, Terraform te mostrara la IP publica del servidor en los outputs.
+Al finalizar, Terraform te mostrara la IP publica y `app_url` en los outputs.
 
 ## Destruir recursos
 
