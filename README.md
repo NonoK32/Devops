@@ -60,6 +60,22 @@ terraform plan
 terraform apply
 ```
 
+## Jenkins (paralelo)
+
+Hay un pipeline paralelo en [Jenkinsfile](/Users/nono/Documents/Nono/DevopsCap/Jenkinsfile)
+
+Requisitos:
+- Jenkins con plugin Pipeline y acceso a `docker`.
+- Variables de entorno en Jenkins (`GHCR_USER`, `GHCR_TOKEN`)
+
+Ejecuta el pipeline desde la misma rama o mediante Multibranch.
+
+Notas:
+- En ramas distintas de `main`, construye imagen pero no hace push (siempre configurable).
+- En `main`, si están definidas `GHCR_USER` y `GHCR_TOKEN`, hace login y push de:
+  - `ghcr.io/nonok32/devops:latest`
+  - `ghcr.io/nonok32/devops:sha-<commit>`
+
 ## Endpoint principal
 
 `GET /?palabra=python`
