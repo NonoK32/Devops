@@ -1,0 +1,20 @@
+FROM jenkins/jenkins:lts
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      git \
+      openssh-client \
+      python3 \
+      python3-pip \
+      python3-venv \
+      docker.io && \
+    rm -rf /var/lib/apt/lists/*
+
+# Let Jenkins user invoke docker when the container is started with the docker socket mounted.
+RUN groupadd -f docker && usermod -aG docker jenkins
+
+USER jenkins

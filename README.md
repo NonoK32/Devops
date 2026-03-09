@@ -76,6 +76,25 @@ Notas:
   - `ghcr.io/nonok32/devops:latest`
   - `ghcr.io/nonok32/devops:sha-<commit>`
 
+Arranque local con Docker Compose:
+
+```bash
+docker compose up -d --build
+docker compose logs -f jenkins
+```
+
+Password inicial de Jenkins:
+
+```bash
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+
+Parar Jenkins:
+
+```bash
+docker compose down
+```
+
 ## Endpoint principal
 
 `GET /?palabra=python`
