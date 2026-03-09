@@ -19,16 +19,18 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh 'python3 -m pip install --upgrade pip'
-                sh 'pip3 install -r requirements.txt'
+                sh 'python3 -m venv .venv_ci'
+                sh '. .venv_ci/bin/activate && python -m pip install --upgrade pip'
+                sh '. .venv_ci/bin/activate && pip install -r requirements.txt'
             }
         }
 
         stage('Tests') {
             steps {
-                sh 'pytest --cov=main --cov-config=.coveragerc --cov-report=term-missing --cov-report=xml'
+                sh '. .venv_ci/bin/activate && pytest --cov=main --cov-config=.coveragerc --cov-report=term-missing --cov-report=xml'
             }
         }
+
 
         stage('Archive coverage') {
             steps {

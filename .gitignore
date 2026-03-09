@@ -52,3 +52,5 @@ override.tf.json
 *_override.tf.json
 terraform.tfvars
 *.auto.tfvars
+jenkins_github_key
+jenkins_github_key.pub
