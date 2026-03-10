@@ -2,16 +2,24 @@ FROM jenkins/jenkins:lts
 
 USER root
 
+ARG SONAR_SCANNER_VERSION=6.1.0.4477
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       ca-certificates \
       curl \
       git \
+      default-jre-headless \
       openssh-client \
       python3 \
       python3-pip \
       python3-venv \
+      unzip \
       docker.io && \
+    curl -fsSL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux-x64.zip" -o /tmp/sonar-scanner.zip && \
+    unzip /tmp/sonar-scanner.zip -d /opt && \
+    ln -s "/opt/sonar-scanner-${SONAR_SCANNER_VERSION}-linux-x64/bin/sonar-scanner" /usr/local/bin/sonar-scanner && \
+    rm -f /tmp/sonar-scanner.zip && \
     rm -rf /var/lib/apt/lists/*
 
 # Let Jenkins user invoke docker when the container is started with the docker socket mounted.

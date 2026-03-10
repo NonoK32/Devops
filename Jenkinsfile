@@ -8,6 +8,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'ghcr.io/nonok32/devops'
+        SONAR_HOST_URL = 'http://sonarqube:9000'
     }
 
     stages {
@@ -31,6 +32,14 @@ pipeline {
             }
         }
 
+        stage('SonarQube analysis (optional)') {
+            when {
+                expression { return env.SONAR_TOKEN != null && env.SONAR_TOKEN.trim() != '' }
+            }
+            steps {
+                sh '. .venv_ci/bin/activate && sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_TOKEN'
+            }
+        }
 
         stage('Archive coverage') {
             steps {

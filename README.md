@@ -67,6 +67,7 @@ Hay un pipeline paralelo en [Jenkinsfile](/Users/nono/Documents/Nono/DevopsCap/J
 Requisitos:
 - Jenkins con plugin Pipeline y acceso a `docker`.
 - Variables de entorno en Jenkins (`GHCR_USER`, `GHCR_TOKEN`)
+- Variable `SONAR_TOKEN` en Jenkins si quieres analisis con SonarQube.
 
 Ejecuta el pipeline desde la misma rama o mediante Multibranch.
 
@@ -82,6 +83,21 @@ Arranque local con Docker Compose:
 docker compose up -d --build
 docker compose logs -f jenkins
 ```
+
+SonarQube quedara disponible en:
+
+```bash
+http://localhost:9000
+```
+
+Credenciales iniciales de SonarQube:
+- user: `admin`
+- pass: `admin` (te pedira cambio de password al primer login)
+
+Para usar analisis en Jenkins:
+1. Entra en SonarQube y crea un token de usuario.
+2. En Jenkins define `SONAR_TOKEN` como variable de entorno del job.
+3. Ejecuta el pipeline; el stage `SonarQube analysis (optional)` se activara.
 
 Password inicial de Jenkins:
 
