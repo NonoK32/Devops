@@ -32,12 +32,11 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis (optional)') {
-            when {
-                expression { return env.SONAR_TOKEN != null && env.SONAR_TOKEN.trim() != '' }
-            }
+        stage('SonarQube analysis') {
             steps {
-                sh '. .venv_ci/bin/activate && sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_TOKEN'
+                withCredentials([string(credentialsId: 'SonarToken', variable: 'SONAR_TOKEN')]) {
+                    sh '. .venv_ci/bin/activate && sonar-scanner -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_TOKEN'
+                }
             }
         }
 

@@ -54,3 +54,4 @@ terraform.tfvars
 *.auto.tfvars
 jenkins_github_key
 jenkins_github_key.pub
+notas.txt
