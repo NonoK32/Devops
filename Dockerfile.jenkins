@@ -10,12 +10,19 @@ RUN apt-get update && \
       curl \
       git \
       default-jre-headless \
+      gnupg \
       openssh-client \
       python3 \
       python3-pip \
       python3-venv \
       unzip \
-      docker.io && \
+      lsb-release && \
+    install -m 0755 -d /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && \
+    chmod a+r /etc/apt/keyrings/docker.asc && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends docker-ce-cli && \
     curl -fsSL "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux-x64.zip" -o /tmp/sonar-scanner.zip && \
     unzip /tmp/sonar-scanner.zip -d /opt && \
     ln -s "/opt/sonar-scanner-${SONAR_SCANNER_VERSION}-linux-x64/bin/sonar-scanner" /usr/local/bin/sonar-scanner && \
